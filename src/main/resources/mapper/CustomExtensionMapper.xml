@@ -34,5 +34,10 @@
         VALUES (#{extension}, NOW())
     </insert>
 
+    <!-- 커스텀 확장자 삭제 -->
+    <delete id="delete">
+        DELETE FROM custom_extension
+        WHERE id = #{id}
+    </delete>
 
 </mapper>

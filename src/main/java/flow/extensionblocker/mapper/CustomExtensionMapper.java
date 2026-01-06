@@ -14,4 +14,6 @@ public interface CustomExtensionMapper {
     int existsCustomByExtension(String extension);
 
     void insert(String extension);
+
+    void delete(Long id);
 }

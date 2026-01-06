@@ -5,6 +5,7 @@ import flow.extensionblocker.dto.FixedExtensionDto;
 import flow.extensionblocker.service.ExtensionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,5 +26,10 @@ public class ExtensionApiController {
     @PostMapping("/add")
     public void addCustom(CustomExtensionDto customExtensionDto) {
         extensionService.addCustom(customExtensionDto);
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteCustom(CustomExtensionDto customExtensionDto) {
+        extensionService.deleteCustom(customExtensionDto);
     }
 }

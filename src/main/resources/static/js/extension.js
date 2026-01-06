@@ -62,4 +62,15 @@ function checkLength(input) {
 // 커스텀 확장자 삭제
 function deleteCustom(id){
 
+  $.ajax({
+    url: '/api/extension/delete',
+    type: 'Delete',
+    data: { id },
+    success: function() {
+      location.reload();
+    },
+    error: function(xhr) {
+      alert(xhr.responseJSON.message);
+    }
+  });
 }

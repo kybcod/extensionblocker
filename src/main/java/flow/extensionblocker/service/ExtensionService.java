@@ -54,5 +54,7 @@ public class ExtensionService {
     }
 
 
-
+    public void deleteCustom(CustomExtensionDto customExtensionDto) {
+        customMapper.delete(customExtensionDto.getId());
+    }
 }
