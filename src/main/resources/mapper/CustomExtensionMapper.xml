@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="flow.extensionblocker.mapper.CustomExtensionMapper">
+
+    <!-- 커스텀 확장자 목록 -->
+    <select id="selectAll" resultType="CustomExtension">
+        SELECT
+            id,
+            extension,
+            created_at
+        FROM custom_extension
+        ORDER BY id DESC
+    </select>
+
+</mapper>
