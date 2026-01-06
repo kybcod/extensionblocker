@@ -15,4 +15,11 @@
         ORDER BY id
     </select>
 
+    <!-- 체크유무 -->
+    <update id="updateFixedBlocked">
+        UPDATE fixed_extension
+        SET blocked = #{blocked}
+        WHERE id = #{id}
+    </update>
+
 </mapper>

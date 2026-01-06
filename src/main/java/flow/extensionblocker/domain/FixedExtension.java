@@ -2,7 +2,6 @@ package flow.extensionblocker.domain;
 
 import lombok.*;
 
-@Builder(toBuilder = true)
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

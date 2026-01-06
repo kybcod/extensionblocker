@@ -15,7 +15,10 @@
 <div class="fixed-area">
   <div th:each="fixed : ${fixedList}">
     <label>
-      <input type="checkbox">
+      <input type="checkbox"
+             th:checked="${fixed.blocked == 'Y'}"
+             th:data-id="${fixed.id}"
+             onchange="toggleFixed(this)">
       <span th:text="${fixed.extension}"></span>
     </label>
   </div>
@@ -25,8 +28,6 @@
 
 <!-- ================= 커스텀 확장자 ================= -->
 <h3>커스텀 확장자</h3>
-
-
 
 
 </body>

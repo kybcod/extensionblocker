@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface FixedExtensionMapper {
     List<FixedExtension> selectAll();
+
+    void updateFixedBlocked(Long id, String blocked);
 }
