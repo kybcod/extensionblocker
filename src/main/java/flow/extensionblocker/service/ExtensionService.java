@@ -4,11 +4,14 @@ import flow.extensionblocker.domain.CustomExtension;
 import flow.extensionblocker.domain.FixedExtension;
 import flow.extensionblocker.dto.CustomExtensionDto;
 import flow.extensionblocker.dto.FixedExtensionDto;
+import flow.extensionblocker.exception.ApiException;
+import flow.extensionblocker.exception.ErrorCode;
 import flow.extensionblocker.mapper.CustomExtensionMapper;
 import flow.extensionblocker.mapper.FixedExtensionMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -42,19 +45,21 @@ public class ExtensionService {
         String extension = customExtensionDto.getExtension().toLowerCase().trim();
 
         if (extension.length() > 20)
-            throw new IllegalArgumentException("20자 초과");
+            throw new ApiException(ErrorCode.EXTENSION_LENGTH_EXCEEDED);
 
         if (customMapper.count() >= 200)
-            throw new IllegalStateException("200개 초과");
+            throw new ApiException(ErrorCode.EXTENSION_LIMIT_EXCEEDED);
 
         if (customMapper.existsCustomByExtension(extension) >= 1 || fixedMapper.existsFixedByExtension(extension) >= 1)
-            throw new IllegalStateException("중복 확장자");
+            throw new ApiException(ErrorCode.DUPLICATE_EXTENSION);
 
         customMapper.insert(extension);
     }
 
 
+    /* 커스텀 확장자 삭제 */
     public void deleteCustom(CustomExtensionDto customExtensionDto) {
         customMapper.delete(customExtensionDto.getId());
     }
+
 }
