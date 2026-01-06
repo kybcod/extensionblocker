@@ -2,6 +2,7 @@ package flow.extensionblocker.service;
 
 import flow.extensionblocker.domain.CustomExtension;
 import flow.extensionblocker.domain.FixedExtension;
+import flow.extensionblocker.dto.CustomExtensionDto;
 import flow.extensionblocker.dto.FixedExtensionDto;
 import flow.extensionblocker.mapper.CustomExtensionMapper;
 import flow.extensionblocker.mapper.FixedExtensionMapper;
@@ -34,4 +35,24 @@ public class ExtensionService {
         String blocked = fixedExtensionDto.getBlocked() ? "Y" : "N";
         fixedMapper.updateFixedBlocked(fixedExtensionDto.getId(), blocked);
     }
+
+    /* 커스텀 확장자 추가 */
+    public void addCustom(CustomExtensionDto customExtensionDto) {
+
+        String extension = customExtensionDto.getExtension().toLowerCase().trim();
+
+        if (extension.length() > 20)
+            throw new IllegalArgumentException("20자 초과");
+
+        if (customMapper.count() >= 200)
+            throw new IllegalStateException("200개 초과");
+
+        if (customMapper.existsCustomByExtension(extension) >= 1 || fixedMapper.existsFixedByExtension(extension) >= 1)
+            throw new IllegalStateException("중복 확장자");
+
+        customMapper.insert(extension);
+    }
+
+
+
 }

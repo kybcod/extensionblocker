@@ -1,12 +1,8 @@
 package flow.extensionblocker.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Builder(toBuilder = true)
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomExtensionDto {

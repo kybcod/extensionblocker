@@ -1,5 +1,6 @@
 package flow.extensionblocker.controller;
 
+import flow.extensionblocker.dto.CustomExtensionDto;
 import flow.extensionblocker.dto.FixedExtensionDto;
 import flow.extensionblocker.service.ExtensionService;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,10 @@ public class ExtensionApiController {
     @PostMapping("/checked")
     public void updateFixedChecked(FixedExtensionDto fixedExtensionDto) {
         extensionService.updateFixedChecked(fixedExtensionDto);
+    }
+
+    @PostMapping("/add")
+    public void addCustom(CustomExtensionDto customExtensionDto) {
+        extensionService.addCustom(customExtensionDto);
     }
 }

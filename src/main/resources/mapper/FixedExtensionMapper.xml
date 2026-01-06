@@ -22,4 +22,11 @@
         WHERE id = #{id}
     </update>
 
+    <!-- 확장자 중복 여부 -->
+    <select id="existsFixedByExtension" resultType="int">
+        SELECT COUNT(*)
+        FROM fixed_extension
+        WHERE extension = #{extension}
+    </select>
+
 </mapper>

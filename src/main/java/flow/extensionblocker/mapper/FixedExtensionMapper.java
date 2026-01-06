@@ -10,4 +10,6 @@ public interface FixedExtensionMapper {
     List<FixedExtension> selectAll();
 
     void updateFixedBlocked(Long id, String blocked);
+
+    int existsFixedByExtension(String extension);
 }

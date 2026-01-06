@@ -8,4 +8,10 @@ import java.util.List;
 @Mapper
 public interface CustomExtensionMapper {
     List<CustomExtension> selectAll();
+
+    int count();
+
+    int existsCustomByExtension(String extension);
+
+    void insert(String extension);
 }

@@ -29,6 +29,18 @@
 <!-- ================= 커스텀 확장자 ================= -->
 <h3>커스텀 확장자</h3>
 
+<div class="custom-input">
+  <input type="text" id="extInput" maxlength="20" placeholder="확장자 입력" oninput="checkLength(this)">
+  <button type="button" onclick="addCustom()">추가</button>
+</div>
+
+<div class="custom-list" id="customArea">
+    <span th:each="custom : ${customList}">
+        <span th:text="${custom.extension}"></span>
+        <button type="button" th:onclick="|deleteCustom(${custom.id})|">X</button>
+    </span>
+</div>
+
 
 </body>
 </html>
