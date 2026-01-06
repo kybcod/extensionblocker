@@ -8,39 +8,51 @@
 </head>
 <body>
 
-<h2>파일 확장자 차단</h2>
+<div class="container">
+    <div class="header">
+        <h2>© 파일 확장자 차단</h2>
+    </div>
 
-<!-- ================= 고정 확장자 ================= -->
-<h3>고정 확장자</h3>
-<div class="fixed-area">
-  <div th:each="fixed : ${fixedList}">
-    <label>
-      <input type="checkbox"
-             th:checked="${fixed.blocked == 'Y'}"
-             th:data-id="${fixed.id}"
-             onchange="toggleFixed(this)">
-      <span th:text="${fixed.extension}"></span>
-    </label>
-  </div>
+    <div class="section">
+        <div class="section-label">
+            <h3>고정 확장자</h3>
+        </div>
+        <div class="section-content fixed-area">
+            <div th:each="fixed : ${fixedList}">
+                <label>
+                    <input type="checkbox"
+                           th:checked="${fixed.blocked == 'Y'}"
+                           th:data-id="${fixed.id}"
+                           onchange="toggleFixed(this)">
+                    <span th:text="${fixed.extension}"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-label">
+            <h3>커스텀 확장자</h3>
+        </div>
+        <div class="section-content">
+            <div class="custom-input">
+                <input type="text" id="extInput" maxlength="20" placeholder="확장자 입력" onkeydown="limitLength(event, this)">
+                <button type="button" onclick="addCustom()">+추가</button>
+            </div>
+            <div class="custom-list-box">
+                <div class="custom-list-counter">
+                    <span id="custom-count" th:text="${#lists.size(customList)} + '/200'"></span>
+                </div>
+                <div class="custom-list" id="customArea">
+                    <span th:each="custom : ${customList}" class="custom-tag">
+                        <span th:text="${custom.extension}"></span>
+                        <button type="button" th:onclick="|deleteCustom(${custom.id})|">x</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<hr>
-
-<!-- ================= 커스텀 확장자 ================= -->
-<h3>커스텀 확장자</h3>
-
-<div class="custom-input">
-  <input type="text" id="extInput" maxlength="20" placeholder="확장자 입력" oninput="checkLength(this)">
-  <button type="button" onclick="addCustom()">추가</button>
-</div>
-
-<div class="custom-list" id="customArea">
-    <span th:each="custom : ${customList}">
-        <span th:text="${custom.extension}"></span>
-        <button type="button" th:onclick="|deleteCustom(${custom.id})|">X</button>
-    </span>
-</div>
-
 
 </body>
 </html>
