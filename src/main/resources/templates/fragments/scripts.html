@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="scripts">
+  <!-- favicon 오류 삭제 -->
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- 화면 js -->
+  <script type="text/javascript" th:src="@{/js/extension.js}"></script>
+
+</th:block>
+</html>
