@@ -62,4 +62,24 @@ public class ExtensionService {
         customMapper.delete(customExtensionDto.getId());
     }
 
+    /* 파일 업로드 테스트 */
+    public void checkFileExtension(MultipartFile file) {
+        String originalFilename = file.getOriginalFilename();
+
+        if (originalFilename == null || !originalFilename.contains(".")) {
+            throw new ApiException(ErrorCode.INVALID_EXTENSION);
+        }
+
+        String extension = originalFilename
+                .substring(originalFilename.lastIndexOf('.') + 1)
+                .toLowerCase();
+
+        boolean isBlocked =
+                fixedMapper.existsBlockedExtension(extension) >= 1 ||
+                        customMapper.existsCustomByExtension(extension) >= 1;
+
+        if (isBlocked) {
+            throw new ApiException(ErrorCode.BLOCKED_EXTENSION);
+        }
+    }
 }

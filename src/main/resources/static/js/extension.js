@@ -20,8 +20,8 @@ function addCustom() {
   const input = $('#extInput');
   const ext = input.val().trim();
 
-  if (!isValidLength(ext)) {
-    alert('최대 입력 길이는 20자리입니다.');
+  if (ext.length > 20) {
+    alert('확장자는 최대 20자까지 가능합니다.');
     input.focus();
     return;
   }
@@ -46,18 +46,23 @@ function addCustom() {
 }
 
 // 길이 제한
-function isValidLength(value) {
-  return value.length <= 20;
-}
+let maxAlertShown = false;
 
+function limitLength(e, input) {
+  const isControlKey = [
+    'Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'
+  ].includes(e.key);
 
-function checkLength(input) {
-  if (!isValidLength(input.value)) {
-    alert('최대 입력 길이는 20자리입니다.');
-    input.value = input.value.substring(0, 20);
+  if (input.value.length >= 20 && !isControlKey) {
+    if (!maxAlertShown) {
+      alert('확장자는 최대 20자까지 가능합니다.');
+      maxAlertShown = true;
+    }
+    e.preventDefault();
+  } else {
+    maxAlertShown = false;
   }
 }
-
 
 // 커스텀 확장자 삭제
 function deleteCustom(id){
@@ -70,6 +75,34 @@ function deleteCustom(id){
       location.reload();
     },
     error: function(xhr) {
+      alert(xhr.responseJSON.message);
+    }
+  });
+}
+
+
+// 파일 업로드 테스트
+function fileUpload(){
+  const file = $('#fileInput')[0].files[0];
+
+  if (!file) {
+    alert('파일을 선택해주세요.');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', file);
+
+  $.ajax({
+    url: '/api/extension/upload',
+    type: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function () {
+      alert('파일 업로드 가능한 파일입니다.');
+    },
+    error: function (xhr) {
       alert(xhr.responseJSON.message);
     }
   });

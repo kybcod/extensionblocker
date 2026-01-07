@@ -35,5 +35,9 @@ public class ExtensionApiController {
         return ResponseEntity.ok().build();
     }
 
-
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
+        extensionService.checkFileExtension(file);
+        return ResponseEntity.ok().build();
+    }
 }

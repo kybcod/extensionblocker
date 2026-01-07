@@ -12,4 +12,6 @@ public interface FixedExtensionMapper {
     void updateFixedBlocked(Long id, String blocked);
 
     int existsFixedByExtension(String extension);
+
+    int existsBlockedExtension(String extension);
 }

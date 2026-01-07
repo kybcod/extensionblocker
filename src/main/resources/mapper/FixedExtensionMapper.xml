@@ -29,4 +29,12 @@
         WHERE extension = #{extension}
     </select>
 
+    <!-- 체크된 확장자 조회 -->
+    <select id="existsBlockedExtension" resultType="int">
+        SELECT COUNT(*)
+        FROM fixed_extension
+        WHERE extension = #{extension}
+          AND blocked = 'Y'
+    </select>
+
 </mapper>

@@ -11,6 +11,19 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<ErrorResponse> handleMaxUploadSizeExceeded(
+            MaxUploadSizeExceededException e) {
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(
+                        ErrorCode.FILE_SIZE_EXCEEDED.getStatus(),
+                        ErrorCode.FILE_SIZE_EXCEEDED.getMessage()
+                ));
+    }
+
+
     @ExceptionHandler(ApiException.class)
     public ResponseEntity<ErrorResponse> handleException(ApiException e) {
         log.error("ApiException: {}", e);
