@@ -117,6 +117,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    max-height: 200px; /* 최대 높이 지정 */
+    overflow-y: auto;  /* 높이를 넘어가면 세로 스크롤 생성 */
 }
 
 .custom-tag {
