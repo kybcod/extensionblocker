@@ -9,7 +9,7 @@ function toggleFixed(checkbox) {
       blocked: checkbox.checked
     },
     error: function(xhr) {
-      alert(xhr.responseJSON.message);
+      basicAlert({ icon: 'error', text: xhr.responseJSON.message });
       checkbox.checked = !checkbox.checked;
     }
   });
@@ -21,13 +21,13 @@ function addCustom() {
   const ext = input.val().trim();
 
   if (ext.length > 20) {
-    alert('확장자는 최대 20자까지 가능합니다.');
+    basicAlert({ icon: 'warning', text: '확장자는 최대 20자까지 가능합니다.' });
     input.focus();
     return;
   }
 
   if (ext.length === 0) {
-    alert('확장자를 입력해주세요.');
+    basicAlert({ icon: 'warning', text: '확장자를 입력해주세요.' });
     input.focus();
     return;
   }
@@ -40,7 +40,7 @@ function addCustom() {
       location.reload();
     },
     error: function(xhr) {
-      alert(xhr.responseJSON.message);
+      basicAlert({ icon: 'error', text: xhr.responseJSON.message });
     }
   });
 }
@@ -55,7 +55,7 @@ function limitLength(e, input) {
 
   if (input.value.length >= 20 && !isControlKey) {
     if (!maxAlertShown) {
-      alert('확장자는 최대 20자까지 가능합니다.');
+      basicAlert({ icon: 'warning', text: '확장자는 최대 20자까지 가능합니다.' });
       maxAlertShown = true;
     }
     e.preventDefault();
@@ -75,7 +75,7 @@ function deleteCustom(id){
       location.reload();
     },
     error: function(xhr) {
-      alert(xhr.responseJSON.message);
+      basicAlert({ icon: 'error', text: xhr.responseJSON.message });
     }
   });
 }
@@ -86,7 +86,7 @@ function fileUpload(){
   const file = $('#fileInput')[0].files[0];
 
   if (!file) {
-    alert('파일을 선택해주세요.');
+    basicAlert({ icon: 'warning', text: '파일을 선택해주세요.' });
     return;
   }
 
@@ -100,10 +100,10 @@ function fileUpload(){
     processData: false,
     contentType: false,
     success: function () {
-      alert('파일 업로드 가능한 파일입니다.');
+      basicAlert({ icon: 'success', text: '\'파일 업로드 가능한 파일입니다.\'' });
     },
     error: function (xhr) {
-      alert(xhr.responseJSON.message);
+      basicAlert({ icon: 'error', text: xhr.responseJSON.message });
     }
   });
 }
