@@ -9,7 +9,7 @@ public enum ErrorCode {
 
     // 커스텀 확장자 관리
     EXTENSION_LENGTH_EXCEEDED(400, "확장자는 최대 20자까지 가능합니다."),
-    EXTENSION_LIMIT_EXCEEDED(400, "커스텀 확장자는 최대 200개까지 등록 가능합니다."),
+    EXTENSION_LIMIT_EXCEEDED(400, "확장자는 최대 20자까지 등록 가능합니다."),
     DUPLICATE_EXTENSION(409, "이미 등록된 확장자입니다."),
 
     // 파일 업로드 검사

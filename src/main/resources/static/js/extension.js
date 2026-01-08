@@ -55,7 +55,7 @@ function limitLength(e, input) {
 
   if (input.value.length >= 20 && !isControlKey) {
     if (!maxAlertShown) {
-      basicAlert({ icon: 'warning', text: '확장자는 최대 20자까지 가능합니다.' });
+      basicAlert({ icon: 'warning', text: '확장자는 최대 20자까지 등록 가능합니다.' });
       maxAlertShown = true;
     }
     e.preventDefault();
