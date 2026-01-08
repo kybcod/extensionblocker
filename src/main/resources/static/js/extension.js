@@ -83,7 +83,9 @@ function deleteCustom(id){
 
 // 파일 업로드 테스트
 function fileUpload(){
-  const file = $('#fileInput')[0].files[0];
+  const fileInput = $('#fileInput');
+  const uploadBtn = $('#uploadBtn');
+  const file = fileInput[0].files[0];
 
   if (!file) {
     basicAlert({ icon: 'warning', text: '파일을 선택해주세요.' });
@@ -93,6 +95,10 @@ function fileUpload(){
   const formData = new FormData();
   formData.append('file', file);
 
+  // 버튼과 인풋 비활성화
+  fileInput.prop('disabled', true);
+  uploadBtn.prop('disabled', true).text('업로드 중...');
+
   $.ajax({
     url: '/api/extension/upload',
     type: 'POST',
@@ -100,10 +106,15 @@ function fileUpload(){
     processData: false,
     contentType: false,
     success: function () {
-      basicAlert({ icon: 'success', text: '\'파일 업로드 가능한 파일입니다.\'' });
+      basicAlert({ icon: 'success', text: '파일 업로드 가능한 파일입니다.' });
     },
     error: function (xhr) {
       basicAlert({ icon: 'error', text: xhr.responseJSON.message });
+    },
+    complete: function () {
+      // 버튼과 인풋 활성화
+      fileInput.prop('disabled', false);
+      uploadBtn.prop('disabled', false).text('업로드');
     }
   });
 }
